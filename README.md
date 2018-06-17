@@ -3,14 +3,16 @@
 
 ## 用法
 1. 数据源格式：
-			```
+```
 NSArray *arr = @[
 				@{@"image":@"", @"title:@""}, 
 				@{@"image":@"", @"title":@""}, 
 				@{@"image":@"", @"title":@""}
 				]
-			```
-    > 其中image和title这这个key是必须的。
+```
+
+> 其中image和title这这个key是必须的。
+
 2. 初始化代码
 ```
     ViewpagerView *viewpager = [[ViewpagerView alloc] initViewpagerViewWith:CGRectMake(0, 100, SCREEN_WIDTH, 200) style:ViewpagerViewStyleDefault andDataSource:arr];
