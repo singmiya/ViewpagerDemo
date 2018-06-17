@@ -69,6 +69,13 @@
     return reuseCell;
 }
 
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if ([self.delegate respondsToSelector:@selector(viewpagerView:didSelectPage:)]) {
+        NSInteger index = _current_page % _dataSource.count;
+        [self.delegate viewpagerView:self didSelectPage:index];
+    }
+}
+
 #pragma mark - property
 - (NSMutableSet *)reusePool {
     if (_reusePool == nil) {
@@ -92,7 +99,7 @@
     CGFloat startX = self.contentOffset.x;
     _current_page = ceil(startX / width);
     NSInteger index = _current_page % _dataSource.count;
-    
+    NSLog(@"index %ld", index);
     NSRange range = NSMakeRange(_current_page - 1, 3);
     // 放置需要显示的cell
     for (NSUInteger i = range.location; i < range.location + range.length; i++) {
