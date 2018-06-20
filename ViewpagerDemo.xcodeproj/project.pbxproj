@@ -16,9 +16,9 @@
 		E722A30B20D23B5C000B514F /* ViewpagerDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E722A30A20D23B5C000B514F /* ViewpagerDemoTests.m */; };
 		E722A31620D23B5C000B514F /* ViewpagerDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E722A31520D23B5C000B514F /* ViewpagerDemoUITests.m */; };
 		E72FE2A420D536FD005C45C1 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E72FE2A320D536FD005C45C1 /* libSDWebImage.a */; };
-		E72FE2A720D53F5A005C45C1 /* ViewpagerBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = E72FE2A620D53F5A005C45C1 /* ViewpagerBottomView.m */; };
 		E768FC7320D3F23A00FEE44A /* ViewpagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E768FC7020D3F23A00FEE44A /* ViewpagerView.m */; };
 		E768FC7420D3F23A00FEE44A /* ViewpagerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E768FC7220D3F23A00FEE44A /* ViewpagerViewCell.m */; };
+		E7E2AFAA20DA4C34002CA020 /* BaseBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E2AFA920DA4C34002CA020 /* BaseBottomView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,12 +73,12 @@
 		E722A31520D23B5C000B514F /* ViewpagerDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewpagerDemoUITests.m; sourceTree = "<group>"; };
 		E722A31720D23B5C000B514F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E72FE2A320D536FD005C45C1 /* libSDWebImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDWebImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		E72FE2A520D53F5A005C45C1 /* ViewpagerBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewpagerBottomView.h; sourceTree = "<group>"; };
-		E72FE2A620D53F5A005C45C1 /* ViewpagerBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewpagerBottomView.m; sourceTree = "<group>"; };
 		E768FC6F20D3F23900FEE44A /* ViewpagerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewpagerViewCell.h; sourceTree = "<group>"; };
 		E768FC7020D3F23A00FEE44A /* ViewpagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewpagerView.m; sourceTree = "<group>"; };
 		E768FC7120D3F23A00FEE44A /* ViewpagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewpagerView.h; sourceTree = "<group>"; };
 		E768FC7220D3F23A00FEE44A /* ViewpagerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewpagerViewCell.m; sourceTree = "<group>"; };
+		E7E2AFA820DA4C34002CA020 /* BaseBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseBottomView.h; sourceTree = "<group>"; };
+		E7E2AFA920DA4C34002CA020 /* BaseBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseBottomView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,8 +190,8 @@
 				E768FC7020D3F23A00FEE44A /* ViewpagerView.m */,
 				E768FC6F20D3F23900FEE44A /* ViewpagerViewCell.h */,
 				E768FC7220D3F23A00FEE44A /* ViewpagerViewCell.m */,
-				E72FE2A520D53F5A005C45C1 /* ViewpagerBottomView.h */,
-				E72FE2A620D53F5A005C45C1 /* ViewpagerBottomView.m */,
+				E7E2AFA820DA4C34002CA020 /* BaseBottomView.h */,
+				E7E2AFA920DA4C34002CA020 /* BaseBottomView.m */,
 			);
 			path = ViewpagerView;
 			sourceTree = "<group>";
@@ -349,9 +349,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7E2AFAA20DA4C34002CA020 /* BaseBottomView.m in Sources */,
 				E722A2F620D23B5A000B514F /* ViewController.m in Sources */,
 				E768FC7320D3F23A00FEE44A /* ViewpagerView.m in Sources */,
-				E72FE2A720D53F5A005C45C1 /* ViewpagerBottomView.m in Sources */,
 				E722A30120D23B5B000B514F /* main.m in Sources */,
 				E722A2F320D23B5A000B514F /* AppDelegate.m in Sources */,
 				E768FC7420D3F23A00FEE44A /* ViewpagerViewCell.m in Sources */,
