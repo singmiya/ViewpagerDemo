@@ -6,9 +6,9 @@
 #import "ViewpagerView.h"
 #import "Constants.h"
 #import "ViewpagerViewCell.h"
-#import "BaseBottomView.h"
 
 #define MAX_PAGE_NUMS 10000
+#define INTERVAL 10
 
 @interface ViewpagerView() {
     ViewpagerViewStyle _view_style; // 主视图样式
@@ -19,7 +19,7 @@
     Class _current_bottom_class;
 }
 @property (nonatomic, strong) NSTimer *timer;
-
+@property (nonatomic, strong) BaseBottomView *bottomView;
 @property (nonatomic, strong) NSMutableDictionary *visibleCells;
 @property (nonatomic, strong) NSMutableSet *reusePool;
 
@@ -27,7 +27,13 @@
 
 @implementation ViewpagerView
 @synthesize delegate = _delegate;
+#pragma mark - system methods
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self layoutViewpagerView];
+}
 
+#pragma mark - couter API
 - (instancetype)initViewpagerViewWith:(CGRect)frame dataSource:(NSArray *)dataSource  viewStyle:(ViewpagerViewStyle)viewStyle andBottomStyle:(BottomViewStyle)bottomStyle {
     self = [super initWithFrame:frame];
     if (self) {
@@ -51,28 +57,44 @@
                 break;
         }
         [self initViewUI];
-        //初始化定时器
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:2 repeats:YES block:^(NSTimer * _Nonnull timer) {
-            self->_current_page ++;
-            [UIView animateWithDuration:.5 animations:^{
-                self.contentOffset = CGPointMake(self->_current_page * self.bounds.size.width, 0);
-            }];
-            
-        }];
+        [self startTimer];
     }
     return self;
 }
+
+- (void)setPageControlNormalColor:(UIColor *)pcNormalColor {
+    [self.bottomView setPcNormalColor:pcNormalColor];
+}
+
+- (void)setPageControlDisplayColor:(UIColor *)pcDisplayColor {
+    [self.bottomView setPcDisplayColor:pcDisplayColor];
+}
+
+#pragma mark - property
+- (NSMutableSet *)reusePool {
+    if (_reusePool == nil) {
+        _reusePool = [NSMutableSet set];
+    }
+    return _reusePool;
+}
+
+- (NSMutableDictionary *)visibleCells {
+    if (_visibleCells == nil) {
+        _visibleCells = [NSMutableDictionary dictionary];
+    }
+    return _visibleCells;
+}
+
+#pragma mark - private
 - (void)initViewUI {
     self.contentSize = CGSizeMake(MAX_PAGE_NUMS * self.bounds.size.width, self.bounds.size.height);
     _current_page = MAX_PAGE_NUMS / 2;
     self.contentOffset = CGPointMake(_current_page * self.bounds.size.width, 0);
     self.pagingEnabled = YES;
     self.showsHorizontalScrollIndicator = NO;
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    [self layoutViewpagerView];
+    // 初始化底部视图
+    self.bottomView = [[_current_bottom_class alloc] initWithFrame:CGRectMake(0, self.bounds.size.height - 30, self.bounds.size.width, 30) dataSource:_data_source bottomStyle:_bottom_style];
+    [self addSubview:self.bottomView];
 }
 
 /**
@@ -93,31 +115,41 @@
 }
 
 /**
- * 点击事件
+ * 开启定时器
  */
--(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+- (void)startTimer {
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:INTERVAL repeats:YES block:^(NSTimer * _Nonnull timer) {
+        self->_current_page ++;
+        [UIView animateWithDuration:.5 animations:^{
+            self.contentOffset = CGPointMake(self->_current_page * self.bounds.size.width, 0);
+            self.bottomView.frame = (CGRect){{self.contentOffset.x, self.bottomView.frame.origin.y}, self.bottomView.frame.size};
+        }];
+    }];
+}
+
+/**
+ * 停止并销毁定时器
+ */
+- (void)stopTimer {
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self stopTimer];
+}
+
+/**
+ * 结束点击事件
+ */
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     if ([self.delegate respondsToSelector:@selector(viewpagerView:didSelectPage:)]) {
         NSInteger index = _current_page % _data_source.count;
         [self.delegate viewpagerView:self didSelectPage:index];
     }
+    [self startTimer];
 }
 
-#pragma mark - property
-- (NSMutableSet *)reusePool {
-    if (_reusePool == nil) {
-        _reusePool = [NSMutableSet set];
-    }
-    return _reusePool;
-}
-
-- (NSMutableDictionary *)visibleCells {
-    if (_visibleCells == nil) {
-        _visibleCells = [NSMutableDictionary dictionary];
-    }
-    return _visibleCells;
-}
-
-#pragma mark - private
 // 布局cell
 - (void)layoutViewpagerView {
     // 计算要显示的是哪些行
@@ -125,7 +157,11 @@
     CGFloat startX = self.contentOffset.x;
     _current_page = ceil(startX / width);
     NSInteger index = _current_page % _data_source.count;
-    NSLog(@"index %ld", index);
+    
+    // 更新bottom view的位置
+    self.bottomView.frame = (CGRect){{startX, self.bottomView.frame.origin.y}, self.bottomView.frame.size};
+    [self.bottomView indexChanged:index];
+    
     NSRange range = NSMakeRange(_current_page - 1, 3);
     // 放置需要显示的cell
     for (NSUInteger i = range.location; i < range.location + range.length; i++) {
@@ -138,7 +174,7 @@
             [cell configCellData:_data_source[index]];
             [self.visibleCells setObject:cell forKey:@(i)];
             cell.frame = CGRectMake(i * width, 0, self.frame.size.width, self.bounds.size.height);
-            [self addSubview:cell];
+            [self insertSubview:cell belowSubview:self.bottomView];
         }
     }
     

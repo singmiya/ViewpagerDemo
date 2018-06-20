@@ -8,7 +8,6 @@
 
 @interface ViewpagerViewCell : UIView
 @property (nonatomic, readonly, strong) UIImageView *imageView;
-@property (nonatomic, readonly, strong) UILabel *titleLabel;
 @property (nonatomic, readonly, strong) NSString *reuseIdentifier;
 
 - (instancetype)initWithFrame:(CGRect)frame reuseIdentifier:(nullable NSString *)reuseIdentifier;
