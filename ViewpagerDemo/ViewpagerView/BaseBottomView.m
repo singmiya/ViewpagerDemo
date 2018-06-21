@@ -36,7 +36,7 @@
 
 - (void)initUI {
     CGSize item_size = CGSizeZero;
-    switch (_style & 0b11111000000) {
+    switch (_style & 0x7c00) {
         case BottomViewStylePageControlCircle:
             item_size = CGSizeMake(ITEM_H, ITEM_H);
             break;
@@ -50,7 +50,7 @@
     
     CGFloat pc_w = PAGE_CONTROL_MARGIN * 2 + _data_source.count * item_size.width + (_data_source.count - 1) * ITEM_H;
     CGFloat pc_x = 0.0f;
-    switch (_style & 0b1111100000000000) {
+    switch (_style & 0x0f8000) {
         case BottomViewStylePageControlCenter:
             pc_x = (self.bounds.size.width - pc_w) / 2;
             break;

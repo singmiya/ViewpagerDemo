@@ -8,18 +8,17 @@
 
 #import <UIKit/UIKit.h>
 typedef NS_ENUM(NSInteger, BottomViewStyle) {
-    // 底部视图样式 0b11111
+    // 底部视图样式 0b1111100000 == 0x03e0
     BottomViewStyleDefault                      = 0 << 5,
     
-    // page control样式 ob1111100000
+    // page control样式 ob111110000000000 == 0x7c00
     BottomViewStylePageControlCircle            = 0 << 10, // default
     BottomViewStylePageControlRectangle         = 1 << 10,
     
-    // 0b111110000000000
+    // 0b11111000000000000000 == 0x0f8000
     BottomViewStylePageControlCenter            = 0 << 15, //default
     BottomViewStylePageControlLeft              = 1 << 15,
     BottomViewStylePageControlRight             = 2 << 15
-    
 };
 
 @interface BaseBottomView : UIView
