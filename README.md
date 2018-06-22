@@ -1,9 +1,9 @@
 # ViewpagerViewDemo
 图片轮播
-![参考文章](https://juejin.im/post/5b2a86bae51d4558b64f1673)
+[参考文章](https://juejin.im/post/5b2a86bae51d4558b64f1673)
 
 ## 效果
-[](https://github.com/singmiya/ViewpagerDemo/blob/master/demo.gif)
+![](https://github.com/singmiya/ViewpagerDemo/blob/master/demo.gif)
 
 ## 用法
 1. 数据源格式：
