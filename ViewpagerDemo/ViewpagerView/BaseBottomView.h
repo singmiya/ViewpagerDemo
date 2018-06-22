@@ -12,13 +12,17 @@ typedef NS_ENUM(NSInteger, BottomViewStyle) {
     BottomViewStyleDefault                      = 0 << 5,
     
     // page control样式 ob111110000000000 == 0x7c00
-    BottomViewStylePageControlCircle            = 0 << 10, // default
+    BottomViewStylePageControlSquare            = 0 << 10, // default
     BottomViewStylePageControlRectangle         = 1 << 10,
+    BottomViewStylePageControlCircle            = 2 << 10,
     
     // 0b11111000000000000000 == 0x0f8000
     BottomViewStylePageControlCenter            = 0 << 15, //default
     BottomViewStylePageControlLeft              = 1 << 15,
-    BottomViewStylePageControlRight             = 2 << 15
+    BottomViewStylePageControlRight             = 2 << 15,
+    
+    // 0b 0001 1111 0000 0000 0000 0000 0000 == 0x01f00000
+    BottomViewStylePageControlFeatureScale      = 1 << 20
 };
 
 @interface BaseBottomView : UIView

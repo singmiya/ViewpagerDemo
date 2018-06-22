@@ -8,7 +8,7 @@
 #import "ViewpagerViewCell.h"
 
 #define MAX_PAGE_NUMS 10000
-#define INTERVAL 10
+#define INTERVAL 1
 
 @interface ViewpagerView() {
     ViewpagerViewStyle _view_style; // 主视图样式
