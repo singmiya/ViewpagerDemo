@@ -1,5 +1,9 @@
 # ViewpagerViewDemo
 图片轮播
+![参考文章](https://juejin.im/post/5b2a86bae51d4558b64f1673)
+
+## 效果
+[](https://github.com/singmiya/ViewpagerDemo/blob/master/demo.gif)
 
 ## 用法
 1. 数据源格式：
@@ -15,8 +19,9 @@ NSArray *arr = @[
 
 2. 初始化代码
 ```
-    ViewpagerView *viewpager = [[ViewpagerView alloc] initViewpagerViewWith:CGRectMake(0, 100, SCREEN_WIDTH, 200) style:ViewpagerViewStyleDefault andDataSource:arr];
+    ViewpagerView *viewpager = [[ViewpagerView alloc] initViewpagerViewWith:CGRectMake(0, 0, SCREEN_WIDTH, 120)  dataSource:arr viewStyle:ViewpagerViewStyleDefault andBottomStyle:BottomViewStyleDefault | BottomViewStylePageControlCenter | BottomViewStylePageControlCircle | BottomViewStylePageControlFeatureScale];
     viewpager.delegate = self;
+    [viewpager setPageControlDisplayColor:[UIColor redColor]];
     [self.view addSubview:viewpager];
 ```
 3. 点击事件委托，遵守`ViewpagerViewDelegate`
@@ -26,6 +31,7 @@ NSArray *arr = @[
 }
 ```
 
-## TODO
-这是个只是图片轮播的简单应用，后续还会添加更多的轮播样式
+## 新特性支持
+* 添加page control样式
+
 
